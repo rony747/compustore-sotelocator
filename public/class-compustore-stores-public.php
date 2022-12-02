@@ -74,11 +74,14 @@ class Compustore_Stores_Public
    */
   public function enqueue_scripts()
   {
-    wp_enqueue_script('leaflet-js', plugin_dir_url(__FILE__) . 'js/leaflet.js', array('jquery'), $this -> version, true);
-    wp_enqueue_script('main-js', plugin_dir_url(__FILE__) . 'js/compustore-stores-public.js', array('jquery'), $this -> version, true);
+
+    wp_register_script('leaflet-js', plugin_dir_url(__FILE__) . 'js/leaflet.js', array('jquery'), $this -> version, true);
+    wp_register_script('main-js', plugin_dir_url(__FILE__) . 'js/compustore-stores-public.js', array('jquery'), $this -> version, true);
     $action      = 'compu_nonce_action';
     $compu_nonce = wp_create_nonce($action);
     wp_localize_script('main-js', 'compu_map_data', ['ajax_url' => admin_url('admin-ajax.php'), 'compustore_nonce' => $compu_nonce, 'plugin_img_dir' => plugin_dir_url(__FILE__) . '/images/',]);
+
+
   }
 
   function create_store_cpt()
@@ -150,6 +153,8 @@ class Compustore_Stores_Public
   function compustore_stores_htmls()
   {
     ob_start();
+    wp_enqueue_script('leaflet-js');
+    wp_enqueue_script('main-js');
     $args      = [
       'post_type'      => 'compustore-store',
       'posts_per_page' => -1,
@@ -163,13 +168,18 @@ class Compustore_Stores_Public
             <div class="compu_main_map_search">
 
               <input type="text" name="s" id="compu_search" placeholder="PLZ oder Ort eingeben "/>
-              <button id="compu_search_btn" type="button"><img src="<?php echo plugin_dir_url(__FILE__)."/images/mapSearch.svg" ?>" alt="search"></button>
+              <button id="compu_search_btn" type="button"><img
+                    src="<?php echo plugin_dir_url(__FILE__) . "/images/mapSearch.svg" ?>" alt="search"></button>
 
               <div id="compu_search_result_area">
 
               </div>
 
-              <div id="comp_search_loader" class="lds-facebook"><div></div><div></div><div></div></div>
+              <div id="comp_search_loader" class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
 
             </div><!-- compu_main_map_search -->
             <div class="compu_main_map_list_wrap">
@@ -275,13 +285,12 @@ class Compustore_Stores_Public
       foreach ($all_search as $compu_map_result) {
 
         $compu_map_title   = $compu_map_result -> post_title;
-        $compu_map_latlong = get_field('compu_latitude', $compu_map_result -> ID) .','. get_field('compu_longitude', $compu_map_result -> ID);
+        $compu_map_latlong = get_field('compu_latitude', $compu_map_result -> ID) . ',' . get_field('compu_longitude', $compu_map_result -> ID);
         $compu_map_street  = get_field('compu_street', $compu_map_result -> ID);
         $compu_map_post    = get_field('compu_postal_code', $compu_map_result -> ID);
         $compu_map_city    = get_field('compu_city', $compu_map_result -> ID);
         $compu_map_state   = get_field('compu_state', $compu_map_result -> ID);
         $compu_map_phone   = get_field('compu_phone', $compu_map_result -> ID);
-
         printf("<li data-id='%s' data-title='%s' data-position='%s'  data-street='%s' data-post-code='%s' data-city='%s' data-state='%s' data-phone='%s'>%s</li>", $compu_map_result -> ID, $compu_map_title, $compu_map_latlong,
           $compu_map_street, $compu_map_post, $compu_map_city, $compu_map_state, $compu_map_phone, $compu_map_title
         );
