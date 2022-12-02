@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://tirony.me
- * @since             1.0.0
+ * @since             1.0.1
  * @package           Compustore_Stores
  *
  * @wordpress-plugin
  * Plugin Name:       Compustore Stores Finder
  * Plugin URI:        https://tirony.me
  * Description:       This is a plugin for Compustore to show the Stores location.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            t.i.rony
  * Author URI:        https://tirony.me
  * License:           GPL-2.0+
@@ -36,7 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'COMPUSTORE_STORES_PLUGINNAME', 'compustore-stores' );
-define( 'COMPUSTORE_STORES_VERSION', '1.0.0' );
+define( 'COMPUSTORE_STORES_VERSION', '1.0.1' );
 
 /**
  * The code that runs during plugin activation.

@@ -63,7 +63,7 @@ class Compustore_Stores_Public
   public function enqueue_styles()
   {
     wp_enqueue_style('leaflet-css', plugin_dir_url(__FILE__) . 'css/leaflet.css', array(), $this -> version, 'all');
-    wp_enqueue_style('main-style', plugin_dir_url(__FILE__) . 'css/compustore-stores-public.css', array(), $this -> version, 'all');
+    wp_enqueue_style('compu_main-style', plugin_dir_url(__FILE__) . 'css/compustore-stores-public.css', array(), $this -> version, 'all');
 
   }
 
@@ -76,10 +76,10 @@ class Compustore_Stores_Public
   {
 
     wp_register_script('leaflet-js', plugin_dir_url(__FILE__) . 'js/leaflet.js', array('jquery'), $this -> version, true);
-    wp_register_script('main-js', plugin_dir_url(__FILE__) . 'js/compustore-stores-public.js', array('jquery'), $this -> version, true);
+    wp_register_script('compu_main-js', plugin_dir_url(__FILE__) . 'js/compustore-stores-public.js', array('jquery'), $this -> version, true);
     $action      = 'compu_nonce_action';
     $compu_nonce = wp_create_nonce($action);
-    wp_localize_script('main-js', 'compu_map_data', ['ajax_url' => admin_url('admin-ajax.php'), 'compustore_nonce' => $compu_nonce, 'plugin_img_dir' => plugin_dir_url(__FILE__) . '/images/',]);
+    wp_localize_script('compu_main-js', 'compu_map_data', ['ajax_url' => admin_url('admin-ajax.php'), 'compustore_nonce' => $compu_nonce, 'plugin_img_dir' => plugin_dir_url(__FILE__) . '/images/',]);
 
 
   }
@@ -154,7 +154,7 @@ class Compustore_Stores_Public
   {
     ob_start();
     wp_enqueue_script('leaflet-js');
-    wp_enqueue_script('main-js');
+    wp_enqueue_script('compu_main-js');
     $args      = [
       'post_type'      => 'compustore-store',
       'posts_per_page' => -1,
