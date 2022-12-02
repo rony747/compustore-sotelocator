@@ -132,14 +132,18 @@
             $(document.body).animate({scrollTop: $("#cmi" + search_id).offset().top, duration: 400});
 
             let toGo = $(this).data("id");
-            $('.compu_main_map_list_wrap').animate({
-                scrollTop: $("#cmi" + toGo).offset().top - 350
-            }, 'slow');
+            let toGoDiv = $("#cmi" + toGo);
+            // $('.compu_main_map_list_wrap').animate({
+            //     scrollTop: toGoDiv.position().top + $('.compu_main_map_list_wrap').scrollTop()
+            // }, 'slow');
+            $('.compu_main_map_list_wrap').scrollTop($('.compu_main_map_list_wrap').scrollTop() + toGoDiv.position().top);
+
             compu_search_files.val('');
             compu_result_area.html('');
             compu_result_area.removeClass('show_search');
             $(map_list_item).removeClass('show');
-            $("#cmi" + toGo).addClass('show')
+            toGoDiv.addClass('show')
+console.log(toGoDiv.offset().top)
             return false;
 
         });
