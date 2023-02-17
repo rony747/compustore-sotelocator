@@ -188,13 +188,13 @@ class Compustore_Stores_Public
                 while ($allStores -> have_posts()) {
                   $allStores -> the_post(); ?>
                   <li id="cmi<?php echo get_the_ID(); ?>" data-id="<?php echo get_the_ID(); ?>"
-                      data-position="<?php echo get_field('compu_latitude'); ?>,<?php echo get_field('compu_longitude'); ?>"
-                      data-title="<?php echo get_the_title(); ?>"
-                      data-street="<?php echo get_field('compu_street'); ?>"
-                      data-post-code="<?php echo get_field('compu_postal_code'); ?>"
-                      data-city="<?php echo get_field('compu_city'); ?>"
-                      data-state="<?php echo get_field('compu_state'); ?>"
-                      data-phone="<?php echo get_field('compu_phone'); ?>"
+                      data-position="<?php echo sanitize_text_field(get_field('compu_latitude')); ?>,<?php echo sanitize_text_field(get_field('compu_longitude')); ?>"
+                      data-title="<?php echo sanitize_text_field(get_the_title()); ?>"
+                      data-street="<?php echo sanitize_text_field(get_field('compu_street')); ?>"
+                      data-post-code="<?php echo sanitize_text_field(get_field('compu_postal_code')); ?>"
+                      data-city="<?php echo sanitize_text_field(get_field('compu_city')); ?>"
+                      data-state="<?php echo sanitize_text_field(get_field('compu_state')); ?>"
+                      data-phone="<?php echo sanitize_text_field(get_field('compu_phone')); ?>"
                   >
 
                     <div class="cmp_title">
